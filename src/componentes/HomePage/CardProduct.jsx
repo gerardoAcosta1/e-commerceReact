@@ -24,23 +24,13 @@ const CardProduct = ({ product }) => {
         e.stopPropagation()
         if(localStorage.getItem('token')){
             dispatch(getCartThunk())
-            let id = product?.id
-            console.log(cart)
-            if(cart?.filter(product => product?.id == id)){
-                const data = {
-                    quantity: cart?.product?.quantity +1,
-                    productId: product.id
-                }
-                addProductInCart(data)
-            }else{
-                const data = {
-                    quantity: 1,
-                    productId: product.id
-                }
-                addProductInCart(data)
+            console.log
+           
+            const data = {
+                quantity: 1,
+                productId: product.id
             }
-           
-           
+            addProductInCart(data)
         }else{
             navigate(`/login`)
         }
