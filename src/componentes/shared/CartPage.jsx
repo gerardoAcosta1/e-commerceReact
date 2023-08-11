@@ -12,17 +12,7 @@ const CartPage = ({visible, count,setVisible}) => {
  
   const [x, setX] = useState(0)
 
-  const source = document.getElementById("draggable");
-  source?.addEventListener("toucstart", (event) => {
-    console.log(event.changedTouches[0].clientX);
-  });
-  source?.addEventListener("touchend", (event) => {
-    event.preventDefault()
-    console.log(event.changedTouches[0].clientX);
-    if(event.changedTouches[0].clientX > 900){
-      setVisible(!visible)
-    }
-  });
+
 
  
 
