@@ -1,0 +1,65 @@
+.container__input {
+
+    width: 100%;
+    background-color: black;
+}
+
+.form__input {
+
+    width: 100%;
+    max-width: 100%;
+
+    display: flex;
+}
+
+.input {
+
+    width: 100%;
+    height: 45px;
+
+    display: inline-block;
+    border: 1px solid rgba(219, 215, 215, 0.788);
+
+    outline: none;
+
+}
+
+.input:focus {
+
+    box-shadow: 2px 2px 2px rgb(192, 188, 188);
+}
+::placeholder{
+    color: rgb(203, 214, 216);
+}
+
+.button__input {
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    background-color: rgb(224, 94, 77);
+    color: white;
+}
+.Filter{
+    
+    position: absolute;
+    right: 15%;
+
+    display: none;
+
+}
+.Filter__name{
+
+    font-weight: 1;
+   color: #c7c7c7;;
+}
+@media screen and (max-width: 992px) {
+
+    .Filter {
+
+        display: block;
+    }
+
+}

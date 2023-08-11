@@ -1,0 +1,23 @@
+.main__container {
+    
+    margin-top: 60px;
+
+    display: flex;
+  
+    
+}
+.products__container {
+
+    width: 100%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+   justify-content: center;
+   
+    padding: 1em;
+    margin: 1em;
+}
+
+
+
