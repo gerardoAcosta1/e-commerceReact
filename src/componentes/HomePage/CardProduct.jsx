@@ -10,7 +10,7 @@ const CardProduct = ({ product }) => {
 
     //<!--<img className='image__card' src={product?.images[0].url} alt="" /> <img src={product.images} alt="" />
 
-    const {addProductInCart} = useCartApi()
+    const {addProductInCart, updateProductInCart} = useCartApi()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     
@@ -22,15 +22,26 @@ const CardProduct = ({ product }) => {
     const cart = useSelector(reducer => reducer.cart)
     const handleAddCart = e => {
         e.stopPropagation()
+        
         if(localStorage.getItem('token')){
             dispatch(getCartThunk())
-            console.log
-           
-            const data = {
-                quantity: 1,
-                productId: product.id
+            let prod = cart?.filter(prod => prod?.product.id == product.id)
+            if(prod[0]?.quantity){
+                const data = {
+                    quantity: prod[0]?.quantity + 1,
+                    
+                }
+                console.log(prod[0])
+                updateProductInCart(data, prod[0]?.id)
+                
+            }else{
+                const data = {
+                    quantity: 1,
+                    productId: product.id
+                }
+                addProductInCart(data)
             }
-            addProductInCart(data)
+            
         }else{
             navigate(`/login`)
         }
