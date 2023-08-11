@@ -40,7 +40,7 @@ const a = document.addEventListener('click', clickFuera)
         </button>
 
         <button className='item__header'>
-          <Link to='/purchases'>
+          <Link to='/register'>
             <i class='bx bx-window-open bx-bg'></i>
           </Link>
         </button>
