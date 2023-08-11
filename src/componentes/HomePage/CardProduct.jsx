@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import '../styles/HomePage/CardProduct.css'
 import useCartApi from '../../hooks/useCartApi'
+import { useState } from 'react'
+import { getCartThunk } from '../../store/slices/cart.slice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CardProduct = ({ product }) => {
 
@@ -9,20 +12,35 @@ const CardProduct = ({ product }) => {
 
     const {addProductInCart} = useCartApi()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     
     const handleNavigate = () => {
         navigate(`/product/${product.id}/`)
        
     }
-
+    useSelector
+    const cart = useSelector(reducer => reducer.cart)
     const handleAddCart = e => {
         e.stopPropagation()
         if(localStorage.getItem('token')){
-            const data = {
-                quantity: 1,
-                productId: product.id
+            dispatch(getCartThunk())
+            let id = product?.id
+            console.log(cart)
+            if(cart?.filter(product => product?.id == id)){
+                const data = {
+                    quantity: cart?.product?.quantity +1,
+                    productId: product.id
+                }
+                addProductInCart(data)
+            }else{
+                const data = {
+                    quantity: 1,
+                    productId: product.id
+                }
+                addProductInCart(data)
             }
-            addProductInCart(data)
+           
+           
         }else{
             navigate(`/login`)
         }

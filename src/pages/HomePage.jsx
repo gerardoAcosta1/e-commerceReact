@@ -100,6 +100,7 @@ const HomaPage = () => {
                         <CardProduct
                             key={product.id}
                             product={product}
+                            
                         />
                     ))
                   

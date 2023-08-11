@@ -53,6 +53,7 @@ function App() {
           <Route exact path='/' element={<CartPage
             visible={visible}
             count={count}
+            setVisible={setVisible}
           />}>
           </Route>
 

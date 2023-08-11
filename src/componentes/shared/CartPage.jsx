@@ -6,12 +6,25 @@ import { addCartG, getCartThunk } from '../../store/slices/cart.slice'
 import CartProduct from './CartProduct'
 import { DragEvent } from 'react'
 import usePurchases from '../../hooks/usePurchases'
-const CartPage = ({visible, count}) => {
+const CartPage = ({visible, count,setVisible}) => {
 
   let total = 0
-  
+ 
   const [x, setX] = useState(0)
 
+  const source = document.getElementById("draggable");
+  source?.addEventListener("toucstart", (event) => {
+    console.log(event.changedTouches[0].clientX);
+  });
+  source?.addEventListener("touchend", (event) => {
+    event.preventDefault()
+    console.log(event.changedTouches[0].clientX);
+    if(event.changedTouches[0].clientX > 900){
+      setVisible(!visible)
+    }
+  });
+
+ 
 
 const {addProductInCart, deleteProductToCart} = useCartApi()
 const {makePurchase, getAllPurchases, purchases} = usePurchases()
@@ -51,7 +64,7 @@ const buy = () =>{
  
   return (
     <div
- 
+    id='draggable' draggable={true}
      onClick={e => e.stopPropagation()} 
      className={`main__cart ${visible ? '' : 'hiden'}`}
    
