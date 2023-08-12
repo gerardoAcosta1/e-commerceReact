@@ -43,7 +43,7 @@ const {makePurchase, getAllPurchases, purchases} = usePurchases()
  
   window.addEventListener('load', e => {
     let drag = document.getElementById('cartPage')
-    drag.addEventListener('drag', e => {
+    drag.addEventListener('touchmove', e => {
       e.preventDefault()
       let dragged = e.target
       drag.className += " hiden";
