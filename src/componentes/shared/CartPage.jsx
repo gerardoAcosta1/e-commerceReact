@@ -40,18 +40,23 @@ const {makePurchase, getAllPurchases, purchases} = usePurchases()
     const subTotal = cv.quantity * cv.product?.price
     return acc + subTotal
   },0)
+  let drag = document.getElementById('cartPage')
  
   window.addEventListener('load', e => {
-    let drag = document.getElementById('cartPage')
+    
     drag.addEventListener('touchmove', e => {
       e.preventDefault()
       let dragged = e.target
-      drag.className += " hiden";
+     // drag.className += " hiden";
       console.log('drag')
     })
 
   })
-
+  const inicio = e => {
+    console.log(e)
+    drag.className += " hiden";
+    console.log('moved')
+   }
 const buy = () =>{
   makePurchase()
   console.log(purchases)
@@ -61,7 +66,7 @@ const buy = () =>{
  
   return (
     <div
-    id='cartPage' draggable='true'
+    id='cartPage' draggable='true' onTouchMove={e => inicio(e) }
      onClick={e => e.stopPropagation()} 
      className={`main__cart ${visible ? '' : 'hiden'}`}
    
