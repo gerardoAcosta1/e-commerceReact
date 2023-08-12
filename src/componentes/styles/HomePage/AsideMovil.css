@@ -1,0 +1,37 @@
+.aside__movil-main{
+    width: 330px;
+height: 90%;
+
+position: absolute;
+position: fixed;
+
+z-index: 99;
+
+display: flex;
+flex-direction: column;
+margin-top: 90px;
+
+margin: 0;
+right: 0;
+top: 60px;
+padding: 0;
+
+border: 1px solid rgba(185, 182, 182, 0.646);
+box-shadow: -2px 2px 0px rgba(128, 128, 128, 0.090);
+
+transition: .3s;
+
+background-color: white;
+}
+.hiden{
+    transform: translateX(+120%);
+}
+@media screen and (min-width: 992px) {
+
+    .aside__movil-main  {
+
+        transform: translateX(+100%);
+        position: absolute;
+    }
+
+}

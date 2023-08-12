@@ -44,11 +44,14 @@ hr{
     width: 80%;
     
 }
+
+
 @media screen and (max-width: 992px) {
 
-    .container__aside {
+    .container__aside  {
 
-        display: none;
+        transform: translateX(-100%);
+        position: absolute;
     }
 
 }

@@ -9,12 +9,7 @@ const CartProduct = ({ product }) => {
     const [count, setcount] = useState(1)
     const { addProductInCart, deleteProductToCart, updateProductInCart } = useCartApi()
     const dispatch = useDispatch()
-    let arr
-
-    useEffect(()=>{
-       arr =  dispatch(getCartThunk())
-       console.log(arr)
-    },[count])
+   
 
     const handleCounter = e => {
         if (e === 1) {

@@ -7,97 +7,103 @@ import CartProduct from './CartProduct'
 import { DragEvent } from 'react'
 import usePurchases from '../../hooks/usePurchases'
 
-const CartPage = ({visible, count,setVisible}) => {
+const CartPage = ({ visible, count, setVisible }) => {
 
   let total = 0
- 
-  const [x, setX] = useState(0)
+  let xStart = 0
+  let drag = document.getElementById('cartPage')
 
-const {addProductInCart, deleteProductToCart} = useCartApi()
-const {makePurchase, getAllPurchases, purchases} = usePurchases()
-
-  const cart = useSelector(reducer => reducer.cart)
+  const { deleteProductToCart } = useCartApi()
+  const { makePurchase, getAllPurchases, purchases } = usePurchases()
 
   const dispatch = useDispatch()
 
-  useEffect(()=>{
+  const cart = useSelector(reducer => reducer.cart)
+
+  useEffect(() => {
 
     dispatch(getCartThunk())
 
-    console.log(cart)
-  
-
-    
-  },[])
+  }, [cart])
 
   const deleteProduct = () => {
-    
-    deleteProductToCart( cart[0]?.id)
-  
+
+    deleteProductToCart(cart[0]?.id)
+
   }
 
-  total = cart.reduce((acc,cv) => {
+  //Total in Car to Buy
+
+  total = cart.reduce((acc, cv) => {
+
     const subTotal = cv.quantity * cv.product?.price
     return acc + subTotal
-  },0)
-  let drag = document.getElementById('cartPage')
- 
-  window.addEventListener('load', e => {
-    
-    drag.addEventListener('touchmove', e => {
-      e.preventDefault()
-      let dragged = e.target
-     // drag.className += " hiden";
-      console.log('drag')
-    })
 
-  })
+  }, 0)
+
+  //Close the modal with sweiper**********
+
+  const start = e => {
+    xStart = e.changedTouches[0].clientX
+  }
   const inicio = e => {
-    console.log(e)
-    drag.className += " hiden";
-    console.log('moved')
-   }
-const buy = () =>{
-  makePurchase()
-  console.log(purchases)
-  getAllPurchases()
-}
 
- 
+    let touch = e.changedTouches[0]
+    let xEnd = touch.clientX
+    let move = xEnd - xStart
+
+    if (move > 140) {
+
+      
+      setVisible(false)
+
+    }
+  }
+  //Buy Car ******************
+
+  const buy = () => {
+
+    makePurchase()
+    getAllPurchases()
+
+  }
+
+
   return (
     <div
-    id='cartPage' draggable='true' onTouchMove={e => inicio(e) }
-     onClick={e => e.stopPropagation()} 
-     className={`main__cart ${visible ? '' : 'hiden'}`}
-   
-     >
+      id='cartPage' draggable='true' onTouchStart={e => start(e)} onTouchEnd={e => inicio(e)}
+
+      onClick={e => e.stopPropagation()}
+      className={`main__cart ${visible ? '' : 'hiden'}`}
+
+    >
       <h3 className='main__cart__title' id='cartPage' > Buy Cart </h3>
       <div className="content__cart" >
         {
-         
+
           cart?.map(product => (
             <CartProduct
-            draggable
-            key={product.id}
-            product={product}
+              draggable
+              key={product.id}
+              product={product}
             />
           ))
         }
 
-   
-        
-     
+
+
+
       </div>
       <div className='container__button__buy'>
         <div className='price__buy'>
           <h3>${total}</h3>
         </div>
         <button
-         onClick={buy}
-        className='button__buy'>Buy</button>
-        </div>
-        
-     
+          onClick={buy}
+          className='button__buy'>Buy</button>
+      </div>
+
+
     </div>
   )
 }

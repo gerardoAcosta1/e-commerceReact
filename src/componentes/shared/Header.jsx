@@ -3,7 +3,7 @@ import '../styles/Header.css'
 import { useState } from "react"
 import { getCartThunk } from "../../store/slices/cart.slice"
 
-const Header = ({setVisible, visible, setCount, count}) => {
+const Header = ({setVisible, visible, setCount, count,visibleA}) => {
 const clickFuera = () => {
   if(visible){
     setVisible()
@@ -18,7 +18,9 @@ const navigate = useNavigate()
   }else{
     navigate('/login')
   }
- 
+  if(visibleA){
+    setVisible(!visibleA)
+  }
  
  }
 const a = document.addEventListener('click', clickFuera)

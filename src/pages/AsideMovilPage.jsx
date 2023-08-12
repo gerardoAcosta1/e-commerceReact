@@ -1,11 +1,15 @@
 import { useForm } from 'react-hook-form'
-import '../styles/HomePage/Aside.css'
-import usePriceAndCategory from '../../hooks/usePriceAndCategory'
-import { productCategoryG } from '../../store/slices/products.slice'
-const Aside = ({ asideVisible }) => {
+import '../componentes/styles/HomePage/AsideMovil.css'
+import usePriceAndCategory from '../hooks/usePriceAndCategory'
+
+const Aside = ({visible,visibleA, setVisibleA}) => {
+  const {set, SearchForPrice} = usePriceAndCategory()
+
+
+  let xStart = 0
+  let drag = document.getElementById('AsideMovil')
 
   const { register, reset, handleSubmit } = useForm()
-  const {set, products2, products3, SearchForPrice} =usePriceAndCategory()
 
   const submit = data =>{
     SearchForPrice(data)
@@ -15,8 +19,26 @@ const Aside = ({ asideVisible }) => {
     })
   }
 
+   //Close the modal with sweiper**********
+
+   const start = e => {
+    xStart = e.changedTouches[0].clientX
+  }
+  const inicio = e => {
+
+    let touch = e.changedTouches[0]
+    let xEnd = touch.clientX
+    let move = xEnd - xStart
+
+    if (move > 140) {
+
+      setVisibleA(!visibleA)
+
+    }
+  }
+
   return (
-    <div className={`container__aside ${asideVisible ? 'asideShow' : 'asideHiden'}`} id='container__aside'>
+    <div className={`aside__movil-main ${visibleA ? '': 'hiden'} `}  draggable='true' id='AsidelMovil' onTouchStart={start} onTouchEnd={inicio}>
       <div className={`header__aside`}>
         <div className='aside__bar1'>
         <h4 className="title__header-aside">Price</h4>
@@ -42,7 +64,7 @@ const Aside = ({ asideVisible }) => {
            
           <button>Search</button>
         </form>
-        
+
       </div>
       <div className="body__aside">
         <button onClick={() => set('Smartphones')}>Smartphones</button>

@@ -4,108 +4,80 @@ import '../componentes/styles/HomePage/HomePage.css'
 import { useState, useEffect } from 'react'
 import Aside from "../componentes/HomePage/Aside"
 import Search from '../componentes/HomePage/Search'
-import { getCartThunk, setCartG } from "../store/slices/cart.slice"
+import { getCartThunk} from "../store/slices/cart.slice"
+import usePriceAndCategory from "../hooks/usePriceAndCategory"
+import { getAllProductsThunk, productByPrice } from "../store/slices/products.slice"
 
-const HomaPage = () => {
-   
-    const [category, setCategory] = useState(0)
+
+const HomaPage = ({visibleA, setVisibleA, visible}) => {
     
     const [price, setPrice] = useState(0)
-    let products = useSelector(reducer => reducer.products)
-    let products2
-    let products3
-   
-    useEffect(() => {
-    
-     
-    products3 = products?.filter(product =>  parseInt(product?.price) > price.from && parseInt(product?.price) < price.to) 
- 
- 
-    console.log(products)
-    
-   getCartThunk()
-    
-    }, [category, price])
 
+    //let products = useSelector(reducer => reducer.products)
     const dispatch = useDispatch()
+    
+  const {set,products, products2, products3,category,productsByCategory, productByPrice} =usePriceAndCategory()
 
-    const set = e => {
-        setCategory(e)
-        if(e == 0){
-            SearchForPrice(0)
-        }
-       products2 = products?.filter(product => product?.category.name == category)
-        dispatch(setCartG(products2))
-        getCartThunk()
-    }
-
-    const SearchForPrice = data => {
-        setPrice(data) 
-        
-        
-        products3 = products?.filter(product =>  parseInt(product?.price) > price.from && parseInt(product?.price) < price.to) 
-       
-        dispatch(setCartG(products?.filter(product =>  parseInt(product?.price) > price.from && parseInt(product?.price) < price.to) ))
-      
-        getCartThunk()
-        console.log(products3)
-    }
-    products3 = products?.filter(product =>  parseInt(product?.price) > price.from && parseInt(product?.price) < price.to) 
-    products2  = products?.filter(product => product?.category.name == category)
    
+ useEffect(()=>{
+    dispatch(getAllProductsThunk())
+console.log(products)
+ },[category])
+
+ console.log(productsByCategory)
+
     localStorage.setItem('home', 'pass')
+
     return (
+
         <div className="main__container">
 
-
-        
             <Aside
-            set={set}
-            SearchForPrice={SearchForPrice}
+                set={set}
+                
             />
-          
-
-
+        
             <div className="products__container">
 
-            
-              <Search/>
+                <Search
+                setVisibleA={setVisibleA}
+                visibleA={visibleA}
+                visible={visible}
               
-
+                />
 
                 {
-                    
-                    products3 != 0 && products2 == 0
-                 ?
-                    products3?.map(product => (
-                      
-                        <CardProduct
-                            key={product.id}
-                            product={product}
-                        />
-                    )) 
-                    :
-                    products2 != 0
-                    ?
-                    products2?.map(product => (
-                      
-                        <CardProduct
-                            key={product.id}
-                            product={product}
-                        />
-                    ))
-                    :
-        
-                    products?.map(product => (
-                      
-                        <CardProduct
-                            key={product.id}
-                            product={product}
 
-                            
-                        />
-                    ))
-                  
+                    productByPrice != 0 && products2 == 0
+                        ?
+                        products2e?.map(product => (
+
+                            <CardProduct
+                                key={product.id}
+                                product={product}
+                            />
+                        ))
+                        :
+                        productsByCategory != 0
+                            ?
+                            productsByCategory?.map(product => (
+
+                                <CardProduct
+                                    key={product.id}
+                                    product={product}
+                                />
+                            ))
+                            :
+
+                            products?.map(product => (
+
+                                <CardProduct
+                                    key={product.id}
+                                    product={product}
+
+
+                                />
+                            ))
                 }
             </div>
         </div>
