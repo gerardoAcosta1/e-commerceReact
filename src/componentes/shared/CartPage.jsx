@@ -6,15 +6,12 @@ import { addCartG, getCartThunk } from '../../store/slices/cart.slice'
 import CartProduct from './CartProduct'
 import { DragEvent } from 'react'
 import usePurchases from '../../hooks/usePurchases'
+
 const CartPage = ({visible, count,setVisible}) => {
 
   let total = 0
  
   const [x, setX] = useState(0)
-
-
-
- 
 
 const {addProductInCart, deleteProductToCart} = useCartApi()
 const {makePurchase, getAllPurchases, purchases} = usePurchases()
@@ -44,22 +41,31 @@ const {makePurchase, getAllPurchases, purchases} = usePurchases()
     return acc + subTotal
   },0)
  
+  window.addEventListener('load', e => {
+    let drag = document.getElementById('cartPage')
+    drag.addEventListener('drag', e => {
+      let dragged = e.target
+      drag.className += " hiden";
+      console.log('drag')
+    })
+
+  })
 
 const buy = () =>{
   makePurchase()
   console.log(purchases)
   getAllPurchases()
 }
- 
+
  
   return (
     <div
-    id='draggable' draggable={true}
+    id='cartPage' draggable='true'
      onClick={e => e.stopPropagation()} 
      className={`main__cart ${visible ? '' : 'hiden'}`}
    
      >
-      <h3 className='main__cart__title'> Buy Cart </h3>
+      <h3 className='main__cart__title' id='cartPage' > Buy Cart </h3>
       <div className="content__cart" >
         {
          

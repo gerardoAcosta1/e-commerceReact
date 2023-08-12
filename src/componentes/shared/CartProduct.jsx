@@ -57,7 +57,7 @@ const CartProduct = ({ product }) => {
         <div className='CartProduct' >
             <div className='sections'>
                 <section className='section__1__cart'>
-                    <img className='image__cart' src={product?.product?.images[0].url} alt="" draggable={true} />
+                    <img  className='image__cart' src={product?.product?.images[0].url} alt="" />
                 </section>
                 
                 <section className="section__2__cart">

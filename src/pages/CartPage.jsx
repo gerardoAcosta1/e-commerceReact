@@ -9,6 +9,8 @@ const CartPage = ({ visible, count }) => {
 
   let total = 0
 
+ 
+
   const { makePurchase, getAllPurchases, purchases } = usePurchases()
 
   const cart = useSelector(reducer => reducer.cart)
@@ -35,14 +37,18 @@ const CartPage = ({ visible, count }) => {
     getAllPurchases()
 
   }
-
-
+  
   return (
     <div
       onClick={e => e.stopPropagation()}
       className={`main__cart ${visible ? '' : 'hiden'}`}
+      draggable='true'
+      id='cartPage'
       >
-      <h3 className='main__cart__title'> Buy Cart </h3>
+
+      <h3 className='main__cart__title'> Buy Cars </h3>
+      
+
       <div className="content__cart" >
         {
 
