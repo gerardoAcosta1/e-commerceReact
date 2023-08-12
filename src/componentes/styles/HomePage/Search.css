@@ -52,8 +52,9 @@
 }
 .Filter__name{
 
-    font-weight: 1;
-   color: #c7c7c7;;
+    font-weight: 500;
+   color: #a29c9c;;
+   cursor: pointer;
 }
 @media screen and (max-width: 992px) {
 

@@ -9,6 +9,7 @@ import { getCartThunk, setCartG } from "../store/slices/cart.slice"
 const HomaPage = () => {
    
     const [category, setCategory] = useState(0)
+    
     const [price, setPrice] = useState(0)
     let products = useSelector(reducer => reducer.products)
     let products2
@@ -100,6 +101,7 @@ const HomaPage = () => {
                         <CardProduct
                             key={product.id}
                             product={product}
+
                             
                         />
                     ))

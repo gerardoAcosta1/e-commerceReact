@@ -5,10 +5,11 @@ const CardProduct = ({ product }) => {
     return (
         <div className='container__product' >
             <article className='card__product ' >
+                <div className='container__header__image'>
                 <header className='card__header'>
-
                     <img className='card__image' src={product?.images[0].url} alt="" />
                 </header>
+                </div>
                 <section className='card__information'>
                     <h4 className='card__brand'>{product.brand}</h4>
                     <h3 className='card__title'>{product.title}</h3>
