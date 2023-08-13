@@ -52,7 +52,7 @@ const CartPage = ({ visible, count, setVisible }) => {
     let xEnd = touch.clientX
     let move = xEnd - xStart
 
-    if (move > 140) {
+    if (move > 340) {
 
       
       setVisible(false)

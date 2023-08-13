@@ -1,7 +1,7 @@
 import { getCartThunk, setCartG } from "../store/slices/cart.slice"
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { productCategoryG, getAllProductsThunk , productByPrice} from "../store/slices/products.slice"
+import { productCategoryG, getAllProductsThunk , productByPrice, setProductsG} from "../store/slices/products.slice"
 const usePriceAndCategory = () => {
 
     const [category, setCategory] = useState(0)
@@ -22,8 +22,9 @@ const usePriceAndCategory = () => {
             SearchForPrice(0)
         }
         //products2 = dispatch(productCategoryG(category))
-        setProductsByCategory(products?.filter(product => product?.category.name == category))  
+        dispatch(setProductsG(products?.filter(product => product?.category.name == category)))
         console.log(productsByCategory) 
+        
         return productsByCategory
     }
     const SearchForPrice = data => {
