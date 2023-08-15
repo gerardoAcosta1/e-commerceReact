@@ -7,7 +7,9 @@ const ProductImage = ({ product }) => {
 
  
 useEffect(()=>{
+
  handleClick()
+ 
 },[image])
 
 const handleClick = e =>{
@@ -43,6 +45,7 @@ const handleClick = e =>{
           
         </div>
         <div className='container__right'>
+
         <div onClick={() => handleClick(1)} className='slider__right'><i class="bx bx-chevron-right"></i></div>
         
         </div>

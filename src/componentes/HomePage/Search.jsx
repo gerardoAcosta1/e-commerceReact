@@ -1,18 +1,21 @@
+import { useEffect } from 'react'
 import '../styles/HomePage/Search.css'
 
-const Search = ({ visibleA, setVisibleA, visible}) => {
-
+const Search = ({ visibleA, setVisibleA, visible, nameValue,handleFilterName, inputName}) => {
+useEffect(()=>{
   if(visible){
     setVisibleA(!visible)
   }
+},[visible])
+  
   return (
     <div className="container__input">
       <form className="form__input">
-        <input className="input" type="text" placeholder=' What are you looking for?' />
+        <input value={nameValue} ref={inputName} onChange={handleFilterName} className="input" type="text" placeholder=' What are you looking for?' />
         <button className='button__input'><box-icon color='white' name='search'></box-icon></button>
       </form>
       <div className="Filter">
-        <h4 onClick={() => setVisibleA(!visibleA)} className="Filter__name" ><i class='bx bx-user bx-bg'></i>Filters</h4>
+        <h4 onClick={() => setVisibleA(!visibleA)} className="Filter__name" > <i class='bx bx-filter-alt bx-sm'></i>Filters</h4>
       </div>
     </div>
   )

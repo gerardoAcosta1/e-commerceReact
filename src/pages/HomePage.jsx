@@ -1,83 +1,64 @@
 import { useDispatch, useSelector } from "react-redux"
 import CardProduct from "../componentes/HomePage/CardProduct"
 import '../componentes/styles/HomePage/HomePage.css'
-import { useState, useEffect } from 'react'
+import AsideMovilPage from '../pages/AsideMovilPage'
 import Aside from "../componentes/HomePage/Aside"
 import Search from '../componentes/HomePage/Search'
-import { getCartThunk} from "../store/slices/cart.slice"
-import usePriceAndCategory from "../hooks/usePriceAndCategory"
-import { getAllProductsThunk, productByPrice } from "../store/slices/products.slice"
+import { getCartThunk } from "../store/slices/cart.slice"
+import getFilterItems from "../utils/getFilterItems"
+import { useEffect } from "react"
 
 
-const HomaPage = ({visibleA, setVisibleA, visible}) => {
-    
-    const [price, setPrice] = useState(0)
+const HomaPage = ({ visibleA, setVisibleA, visible }) => {
 
-    //let products = useSelector(reducer => reducer.products)
     const dispatch = useDispatch()
-    
-  const {set,products, products2, products3,category,productsByCategory, productByPrice} =usePriceAndCategory()
 
-   
- useEffect(()=>{
-    dispatch(getAllProductsThunk())
-console.log(products)
- },[category])
+useEffect(()=>{
 
- console.log(productsByCategory)
-
+    dispatch(getCartThunk())
     localStorage.setItem('home', 'pass')
+
+}, [])
+
+    const products = useSelector(reducer => reducer.products)
+
+
+
+    //FILTRADO SEARCH MAIN
+    
+    const {nameValue, inputName, handleFilterName, cbFilter, setFromTo} = getFilterItems()
 
     return (
 
         <div className="main__container">
 
             <Aside
-                set={set}
-                
+               setFromTo={setFromTo}
+
             />
-        
+          
             <div className="products__container">
 
                 <Search
-                setVisibleA={setVisibleA}
-                visibleA={visibleA}
-                visible={visible}
-              
+                    visibleA={visibleA}
+                    setVisibleA={setVisibleA}
+                    visible={visible}
+                    nameValue={nameValue}
+                    handleFilterName={handleFilterName}
+                    inputName={inputName}
                 />
 
                 {
 
-                    productByPrice != 0 && products2 == 0
-                        ?
-                        products2e?.map(product => (
+                    products?.filter(cbFilter).map(product => (
 
-                            <CardProduct
-                                key={product.id}
-                                product={product}
-                            />
-                        ))
-                        :
-                        productsByCategory != 0
-                            ?
-                            productsByCategory?.map(product => (
-
-                                <CardProduct
-                                    key={product.id}
-                                    product={product}
-                                />
-                            ))
-                            :
-
-                            products?.map(product => (
-
-                                <CardProduct
-                                    key={product.id}
-                                    product={product}
+                        <CardProduct
+                            key={product.id}
+                            product={product}
 
 
-                                />
-                            ))
+                        />
+                    ))
                 }
             </div>
         </div>

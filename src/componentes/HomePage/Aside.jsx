@@ -1,54 +1,89 @@
 import { useForm } from 'react-hook-form'
 import '../styles/HomePage/Aside.css'
-import usePriceAndCategory from '../../hooks/usePriceAndCategory'
-import { productCategoryG } from '../../store/slices/products.slice'
-const Aside = ({ asideVisible }) => {
+import { useState } from 'react'
+import getFilterItems from '../../utils/getFilterItems'
+const Aside = ({setFromTo}) => {
+
+  
+  const [rotate, setRotate] = useState(false)
+  const [rotate2, setRotate2] = useState(false)
 
   const { register, reset, handleSubmit } = useForm()
-  const {set, products2, products3, SearchForPrice} =usePriceAndCategory()
+  const { handleAllCategories, filterByCategory} = getFilterItems()
 
-  const submit = data =>{
-    SearchForPrice(data)
+
+  const submit = data => {
+
+    const from = +data.from
+    const to = +data.to
+    let obj= {
+      from: from || 0,
+      to: to || Infinity
+    }
+    console.log(obj)
+    setFromTo(obj)
+   
     reset({
       from: '',
       to: ''
     })
   }
+  const rotated = e => {
+    if (e == 1) {
+      setRotate(!rotate)
+    } else {
+      setRotate2(!rotate2)
+    }
+  }
 
+  const filterCategory = e => {
+
+    filterByCategory(e)
+    if (e == 5) handleAllCategories()
+
+  }
   return (
-    <div className={`container__aside ${asideVisible ? 'asideShow' : 'asideHiden'}`} id='container__aside'>
-      <div className={`header__aside`}>
-        <div className='aside__bar1'>
-        <h4 className="title__header-aside">Price</h4>
-        <h4 className="icono">y</h4>
+    <div className={`container__aside__main `} id='container__aside'>
+      <div className={`container__aside`}>
+        <div className='container__title__price'>
+          <h4 className="title__header-aside">Price</h4>
+          <h4 onClick={() => rotated(1)} className={`icono ${rotate ? 'rotate' : ''}`}><i class="bx bx-chevron-right bx-sm"></i></h4>
         </div>
-      <hr />
-        <form className='container__form' onSubmit={handleSubmit(submit)}>
-          <div className="container__price">
+        <hr />
+        <form className={`container__form`} onSubmit={handleSubmit(submit)}>
+          <div className='container__from'>
 
             <label htmlFor="from">From</label>
+            <input className='input__price' {...register('from')} type="number" id="from" />
 
-            <input className='input__price' {...register('from')} type="text" id="from" />
+          </div>
+          <div className='container__to'>
 
+            <label htmlFor="to">To</label>
+            <input className='input__price' {...register('to')} type="number" id="to" />
 
-            </div>
-            <div>
+          </div>
+          <div className='button__search__container'>
+            <button className='aside__search-btn'>Search</button>
+          </div>
 
-              <label htmlFor="to">To</label>
-
-              <input {...register('to')} type="text" id="to" />
-
-            </div>
-           
-          <button>Search</button>
         </form>
-        
-      </div>
-      <div className="body__aside">
-        <button onClick={() => set('Smartphones')}>Smartphones</button>
-        <button onClick={() => set('Smart TV')}>Smart tv</button>
-        <button onClick={() => set('Stoves')}>Stoves</button>
-        <button onClick={() => set(0)}>All Products</button>
+        <div className={`body__aside ${rotate ? 'translate__price' : ''}`}>
+          <div className='container__title__price'>
+            <h4 className="title__header-aside-2">Category</h4>
+            <h4 onClick={() => rotated(2)} className={`icono ${rotate2 ? 'rotate' : ''}`}><i class="bx bx-chevron-right bx-sm"></i></h4>
+          </div>
+          <div className='container__buttons'>
+            <div className={`container__category ${rotate2 ? 'translate__category' : ''}`}>
+              <button className='button__category' onClick={() => filterCategory(4)}>Computers</button>
+              <button className='button__category' onClick={() => filterCategory(3)}>Smartphones</button>
+              <button className='button__category' onClick={() => filterCategory(2)}>Smart tv</button>
+              <button className='button__category' onClick={() => filterCategory(1)}>Stoves</button>
+              <button className='button__category' onClick={() => filterCategory(5)}>All Products</button>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   )

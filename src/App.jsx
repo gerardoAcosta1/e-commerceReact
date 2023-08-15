@@ -24,6 +24,7 @@ function App() {
   useEffect(() => {
     dispatch(getAllProductsThunk())
   }, [])
+  
   return (
     <div>
       <Header
@@ -35,13 +36,15 @@ function App() {
       />
       <AsideMovilPage
       setVisibleA={setVisibleA}
-      visibleA={visibleA} 
+      visibleA={visibleA}
+      visible={visible} 
       />
       <Routes>
         <Route path='/' element={<HomePage 
          setVisibleA={setVisibleA}
          visibleA={visibleA}
          visible={visible}
+         
          />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/login' element={<LoginPage />} />
@@ -53,19 +56,33 @@ function App() {
             <Route path='/product/:id' element={<CartPage
               visible={visible}
               count={count}
+              setVisible={setVisible}
             />}>
             </Route>
             <Route path='/purchases' element={<CartPage
               visible={visible}
               count={count}
+              setVisible={setVisible}
             />}>
             </Route>
-            <Route path='/purchases' element={<PurchasesPage />} />
+            <Route path='/register' element={<CartPage
+              visible={visible}
+              count={count}
+              setVisible={setVisible}
+            />}>
+            </Route>
+            <Route path='/login' element={<CartPage
+              visible={visible}
+              count={count}
+              setVisible={setVisible}
+            />}>
+            </Route>
           </Route>
           <Route exact path='/' element={<CartPage
             visible={visible}
             count={count}
             setVisible={setVisible}
+            setVisibleA={setVisibleA}
           />}>
           </Route>
           <Route exact path='/' element={<AsideMovilPage/>}>

@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { addCartG, deleteCartG, updateCartG, getCartThunk } from '../../store/slices/cart.slice'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import {  getCartThunk } from '../../store/slices/cart.slice'
 import '../styles/CartProduct.css'
 import useCartApi from '../../hooks/useCartApi'
-
 const CartProduct = ({ product }) => {
 
     const [count, setcount] = useState(1)
-    const { addProductInCart, deleteProductToCart, updateProductInCart } = useCartApi()
-    const dispatch = useDispatch()
+    const { deleteProductToCart, updateProductInCart } = useCartApi()
+
    
 
     const handleCounter = e => {
@@ -33,16 +31,7 @@ const CartProduct = ({ product }) => {
     }
     const deleteProduct = () => {
 
-        if (product?.quantity > 1) {
-
-            let data = { quantity: product?.quantity - 1 }
-            updateProductInCart(data, product?.id)
-            dispatch(getCartThunk())
-        } else {
             deleteProductToCart(product?.id)
-
-        }
-
     }
 
 

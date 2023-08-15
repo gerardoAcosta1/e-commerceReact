@@ -1,17 +1,33 @@
 import { useForm } from 'react-hook-form'
 import '../componentes/styles/HomePage/AsideMovil.css'
-import usePriceAndCategory from '../hooks/usePriceAndCategory'
+import { useEffect, useState } from 'react'
+import getFilterItems from '../utils/getFilterItems'
 
-const Aside = ({visible,visibleA, setVisibleA}) => {
-  const {set, SearchForPrice} = usePriceAndCategory()
+const AsideMovilPage = ({ visible, visibleA, setVisibleA }) => {
 
+
+  const { handleAllCategories, filterByCategory } = getFilterItems()
+
+  useEffect(() => {
+
+    if (visible) setVisibleA(!visible)
+    
+    if (!visibleA) {
+      setRotate(false)
+      setRotate2(false)
+    }
+
+  }, [visible, visibleA])
+
+  const [rotate, setRotate] = useState(false)
+  const [rotate2, setRotate2] = useState(false)
+
+  const { register, reset, handleSubmit } = useForm()
 
   let xStart = 0
   let drag = document.getElementById('AsideMovil')
 
-  const { register, reset, handleSubmit } = useForm()
-
-  const submit = data =>{
+  const submit = data => {
     SearchForPrice(data)
     reset({
       from: '',
@@ -19,10 +35,12 @@ const Aside = ({visible,visibleA, setVisibleA}) => {
     })
   }
 
-   //Close the modal with sweiper**********
+  //Close the modal with sweiper**********
 
-   const start = e => {
+  const start = e => {
+
     xStart = e.changedTouches[0].clientX
+
   }
   const inicio = e => {
 
@@ -37,43 +55,59 @@ const Aside = ({visible,visibleA, setVisibleA}) => {
     }
   }
 
+  const filterCategory = e => {
+
+    filterByCategory(e)
+
+    setVisibleA(!visibleA)
+
+    if (e == 5) handleAllCategories()
+
+  }
   return (
-    <div className={`aside__movil-main ${visibleA ? '': 'hiden'} `}  draggable='true' id='AsidelMovil' onTouchStart={start} onTouchEnd={inicio}>
-      <div className={`header__aside`}>
-        <div className='aside__bar1'>
-        <h4 className="title__header-aside">Price</h4>
-        <h4 className="icono">y</h4>
+    <div className={`aside__movil-main ${visibleA ? '' : 'hiden'} `} draggable='true' id='AsidelMovil' onTouchStart={start} onTouchEnd={inicio}>
+      <div className={`container__aside`}>
+        <div className='container__title__price'>
+          <h4 className="title__header-aside">Price</h4>
+          <h4 onClick={() => setRotate(!rotate)} className={`icono ${rotate ? 'rotate' : ''}`}><i class="bx bx-chevron-right bx-sm"></i></h4>
         </div>
-      <hr />
-        <form className='container__form' onSubmit={handleSubmit(submit)}>
-          <div className="container__price">
+        <hr />
+        <form className={`container__form`} onSubmit={handleSubmit(submit)}>
+          <div className='container__from'>
 
             <label htmlFor="from">From</label>
-
             <input className='input__price' {...register('from')} type="text" id="from" />
 
+          </div>
+          <div className='container__to'>
 
-            </div>
-            <div>
+            <label htmlFor="to">To</label>
+            <input className='input__price' {...register('to')} type="text" id="to" />
 
-              <label htmlFor="to">To</label>
-
-              <input {...register('to')} type="text" id="to" />
-
-            </div>
-           
-          <button>Search</button>
+          </div>
+          <div className='button__search__container'>
+            <button className='aside__search-btn'>Search</button>
+          </div>
         </form>
+        <div className={`body__aside ${rotate ? 'translate__price' : ''}`}>
+          <div className='container__title__price'>
+            <h4 className="title__header-aside-2">Category</h4>
+            <h4 onClick={() => setRotate2(!rotate2)} className={`icono ${rotate2 ? 'rotate' : ''}`}><i class="bx bx-chevron-right bx-sm"></i></h4>
+          </div>
+          <div className='container__buttons'>
+            <div className={`container__category ${rotate2 ? 'translate__category' : ''}`}>
+              <button className='button__category' onClick={() => filterCategory(4)}>Computers</button>
+              <button className='button__category' onClick={() => filterCategory(3)}>Smartphones</button>
+              <button className='button__category' onClick={() => filterCategory(2)}>Smart tv</button>
+              <button className='button__category' onClick={() => filterCategory(1)}>Stoves</button>
+              <button className='button__category' onClick={() => filterCategory(5)}>All Products</button>
+            </div>
+          </div>
 
-      </div>
-      <div className="body__aside">
-        <button onClick={() => set('Smartphones')}>Smartphones</button>
-        <button onClick={() => set('Smart TV')}>Smart tv</button>
-        <button onClick={() => set('Stoves')}>Stoves</button>
-        <button onClick={() => set(0)}>All Products</button>
+        </div>
       </div>
     </div>
   )
 }
 
-export default Aside
+export default AsideMovilPage

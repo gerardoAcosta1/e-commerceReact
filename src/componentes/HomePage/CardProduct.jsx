@@ -62,7 +62,10 @@ const CardProduct = ({ product }) => {
             <article onClick={handleNavigate} className='product__card ' >
                 <div className='content__header'>
                 <header className='header__card'>
-                    <img className='image__card' src={product?.images[0].url} alt="" />
+                  
+                    <img  className='image__card' src={product?.images[0].url} alt="" />
+                   
+                    
                 </header>
                 </div>
                 <section className='information__card'>

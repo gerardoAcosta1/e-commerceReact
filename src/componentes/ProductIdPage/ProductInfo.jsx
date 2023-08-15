@@ -5,7 +5,7 @@ import { useState } from "react"
 const ProductInfo = ({ product }) => {
 
     const [count, setcount] = useState(1)
-    const {addProductInCart, deleteProductToCart} = useCartApi()
+    const {addProductInCart} = useCartApi()
 
     const handleCounter = e => {
         if (e === 1) {
@@ -17,11 +17,14 @@ const ProductInfo = ({ product }) => {
     }
 
     const handleClick = e => {
+
         e.stopPropagation()
+
         const data = {
             quantity: count,
             productId: product.id
         }
+        
         addProductInCart(data)
     }
     return (

@@ -5,9 +5,7 @@ import { getCartThunk } from "../../store/slices/cart.slice"
 
 const Header = ({setVisible, visible, setCount, count,visibleA}) => {
 const clickFuera = () => {
-  if(visible){
-    setVisible()
-  }
+ 
 }
 const navigate = useNavigate()
  const isVisible = ()=>{
@@ -18,10 +16,7 @@ const navigate = useNavigate()
   }else{
     navigate('/login')
   }
-  if(visibleA){
-    setVisible(!visibleA)
-  }
- 
+
  }
 const a = document.addEventListener('click', clickFuera)
   return (

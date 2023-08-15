@@ -18,7 +18,7 @@
     height: 45px;
 
     display: inline-block;
-    border: 1px solid rgba(219, 215, 215, 0.788);
+    border: 1px solid rgba(154, 154, 151, 0.66);
 
     outline: none;
 
@@ -40,7 +40,7 @@
     border: none;
 
     background-color: rgb(224, 94, 77);
-    color: white;
+    color: rgb(105, 103, 103);
 }
 .Filter{
     

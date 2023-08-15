@@ -7,12 +7,12 @@ const productsSlice = createSlice({
     initialState: null,
     reducers:{
         setProductsG: (state, action) => action.payload,
-        productCategoryG: (state, action) => state?.filter(product => product?.category?.name == action.payload),
-        productByPrice: (state, action) => state.filter(product => parseInt(product?.price) > action.payload.from && parseInt(product?.price) < action.payload.to)
+        
+        
     }
 })
 
-export const {setProductsG, productCategoryG, productByPrice} = productsSlice.actions
+export const {setProductsG} = productsSlice.actions
 export default productsSlice.reducer
 
 export const getAllProductsThunk = () => dispatch =>{
@@ -21,4 +21,12 @@ export const getAllProductsThunk = () => dispatch =>{
     .then(res => dispatch(setProductsG(res.data)))
     .catch(err => console.log(err))
     
+
+}
+export const getFilteredProductsThunk = id => dispatch =>{
+    const url = `https://e-commerce-api-v2.academlo.tech/api/v1/products?categoryId=${id}`
+    axios.get(url)
+    .then(res => dispatch(setProductsG(res.data)))
+    .catch(err => console.log(err))
+
 }
