@@ -2,8 +2,10 @@ import { useForm } from 'react-hook-form'
 import '../componentes/styles/HomePage/AsideMovil.css'
 import { useEffect, useState } from 'react'
 import getFilterItems from '../utils/getFilterItems'
+import { setPricesG } from '../store/slices/productPrice'
+import { useDispatch } from 'react-redux'
 
-const AsideMovilPage = ({ visible, visibleA, setVisibleA }) => {
+const AsideMovilPage = ({ visible, visibleA, setVisibleA, setFromTo }) => {
 
 
   const { handleAllCategories, filterByCategory } = getFilterItems()
@@ -26,9 +28,18 @@ const AsideMovilPage = ({ visible, visibleA, setVisibleA }) => {
 
   let xStart = 0
   let drag = document.getElementById('AsideMovil')
-
+const dispatch = useDispatch()
   const submit = data => {
-    SearchForPrice(data)
+
+    const from = +data.from
+    const to = +data.to
+    let obj= {
+      from: from || 0,
+      to: to || Infinity
+    }
+    console.log(obj)
+    dispatch(setPricesG(obj))
+   
     reset({
       from: '',
       to: ''

@@ -22,7 +22,7 @@ useEffect(()=>{
 
     const products = useSelector(reducer => reducer.products)
 
-
+    
 
     //FILTRADO SEARCH MAIN
     

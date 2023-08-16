@@ -13,6 +13,7 @@ import ProtectedRoutes from './pages/ProtectedRoutes'
 import PurchasesPage from './pages/PurchasesPage'
 import ProtectedRoutes2 from './pages/ProtectedRoutes2'
 import AsideMovilPage from './pages/AsideMovilPage'
+
 function App() {
 
   const [visible, setVisible] = useState(false)
@@ -37,7 +38,8 @@ function App() {
       <AsideMovilPage
       setVisibleA={setVisibleA}
       visibleA={visibleA}
-      visible={visible} 
+      visible={visible}
+    
       />
       
       <Routes>
@@ -45,6 +47,7 @@ function App() {
          setVisibleA={setVisibleA}
          visibleA={visibleA}
          visible={visible}
+       
          
          />} />
          

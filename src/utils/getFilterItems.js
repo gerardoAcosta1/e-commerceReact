@@ -21,7 +21,7 @@ const getFilterItems = () => {
 
     const products = useSelector(reducer => reducer.products)
 
-
+    const price1 = useSelector(reducer => reducer.price)
 
     useEffect(()=> {
         if(products == 0) dispatch(getAllProductsThunk())
@@ -44,11 +44,13 @@ const getFilterItems = () => {
         const filteredName = nameReal.includes(inputNameLower)
 
         //filtered Price
-
-        const price = Number(prod.price)
+        
+            const price = Number(prod.price)
        
-        const filteredPrice =fromTo.from  <= price && price <= fromTo.to
-
+            const filteredPrice =price1.from  <= price && price <= price1.to
+            console.log(price1)
+        
+       
         return filteredName && filteredPrice
     }
 

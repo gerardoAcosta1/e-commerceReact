@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form'
 import '../styles/HomePage/Aside.css'
 import { useState } from 'react'
 import getFilterItems from '../../utils/getFilterItems'
+import { setPricesG } from '../../store/slices/productPrice'
+import { useDispatch } from 'react-redux'
 const Aside = ({setFromTo}) => {
 
   
@@ -11,7 +13,7 @@ const Aside = ({setFromTo}) => {
   const { register, reset, handleSubmit } = useForm()
   const { handleAllCategories, filterByCategory} = getFilterItems()
 
-
+const dispatch = useDispatch()
   const submit = data => {
 
     const from = +data.from
@@ -21,7 +23,8 @@ const Aside = ({setFromTo}) => {
       to: to || Infinity
     }
     console.log(obj)
-    setFromTo(obj)
+    dispatch(setPricesG(obj))
+    console.log()
    
     reset({
       from: '',
