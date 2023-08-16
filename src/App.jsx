@@ -39,6 +39,7 @@ function App() {
       visibleA={visibleA}
       visible={visible} 
       />
+      
       <Routes>
         <Route path='/' element={<HomePage 
          setVisibleA={setVisibleA}
@@ -46,8 +47,10 @@ function App() {
          visible={visible}
          
          />} />
-        <Route path='/register' element={<RegisterPage />} />
+         
+        <Route path='/register' element={<RegisterPage /> } />
         <Route path='/login' element={<LoginPage />} />
+        
         <Route path='/product/:id' element={<ProductIdPage />} />
       </Routes>
       <Routes>
@@ -60,12 +63,6 @@ function App() {
             />}>
             </Route>
             <Route path='/purchases' element={<CartPage
-              visible={visible}
-              count={count}
-              setVisible={setVisible}
-            />}>
-            </Route>
-            <Route path='/register' element={<CartPage
               visible={visible}
               count={count}
               setVisible={setVisible}
@@ -86,6 +83,7 @@ function App() {
           />}>
           </Route>
           <Route exact path='/' element={<AsideMovilPage/>}>
+       
           </Route>
         </Route>
       </Routes>
