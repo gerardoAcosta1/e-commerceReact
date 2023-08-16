@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import useFetch from "../hooks/useFetch"
 import { getAllProductsThunk, getFilteredProductsThunk } from "../store/slices/products.slice"
 import { useDispatch, useSelector } from "react-redux"
+import { setPricesG } from "../store/slices/productPrice"
 
 
 const getFilterItems = () => {
@@ -47,11 +48,13 @@ const getFilterItems = () => {
         
             const price = Number(prod.price)
        
-            const filteredPrice =price1.from  <= price && price <= price1.to
-            console.log(price1)
+           const filteredPrice = price1.from  <= price && price <= price1.to
+
+           
+            
         
        
-        return filteredName && filteredPrice
+        return filteredName && filteredPrice 
     }
 
     //Filtered Categories ASIDE
@@ -71,7 +74,6 @@ const getFilterItems = () => {
     const handleAllCategories = () => {
 
         dispatch(getAllProductsThunk())
-
     }
     const filterByCategory = id => {
 

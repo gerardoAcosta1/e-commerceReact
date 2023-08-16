@@ -7,6 +7,7 @@ import Search from '../componentes/HomePage/Search'
 import { getCartThunk } from "../store/slices/cart.slice"
 import getFilterItems from "../utils/getFilterItems"
 import { useEffect } from "react"
+import { getAllProductsThunk } from "../store/slices/products.slice"
 
 
 const HomaPage = ({ visibleA, setVisibleA, visible }) => {
@@ -16,6 +17,7 @@ const HomaPage = ({ visibleA, setVisibleA, visible }) => {
 useEffect(()=>{
 
     dispatch(getCartThunk())
+    
     localStorage.setItem('home', 'pass')
 
 }, [])
@@ -46,8 +48,9 @@ useEffect(()=>{
                     nameValue={nameValue}
                     handleFilterName={handleFilterName}
                     inputName={inputName}
+                    
                 />
-
+              
                 {
 
                     products?.filter(cbFilter).map(product => (

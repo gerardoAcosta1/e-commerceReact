@@ -53,9 +53,10 @@
 .Filter__name{
 
     font-weight: 500;
-   color: #a29c9c;;
+   color: #a29c9c;
    cursor: pointer;
 }
+
 @media screen and (max-width: 992px) {
 
     .Filter {

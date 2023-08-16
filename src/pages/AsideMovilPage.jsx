@@ -10,6 +10,11 @@ const AsideMovilPage = ({ visible, visibleA, setVisibleA, setFromTo }) => {
 
   const { handleAllCategories, filterByCategory } = getFilterItems()
 
+  const [rotate, setRotate] = useState(false)
+  const [rotate2, setRotate2] = useState(false)
+
+  const { register, reset, handleSubmit } = useForm()
+
   useEffect(() => {
 
     if (visible) setVisibleA(!visible)
@@ -21,10 +26,7 @@ const AsideMovilPage = ({ visible, visibleA, setVisibleA, setFromTo }) => {
 
   }, [visible, visibleA])
 
-  const [rotate, setRotate] = useState(false)
-  const [rotate2, setRotate2] = useState(false)
 
-  const { register, reset, handleSubmit } = useForm()
 
   let xStart = 0
   let drag = document.getElementById('AsideMovil')
@@ -75,6 +77,10 @@ const dispatch = useDispatch()
     if (e == 5) handleAllCategories()
 
   }
+
+  const handeClick = () =>{
+    setVisibleA(!visibleA)
+  }
   return (
     <div className={`aside__movil-main ${visibleA ? '' : 'hiden'} `} draggable='true' id='AsidelMovil' onTouchStart={start} onTouchEnd={inicio}>
       <div className={`container__aside`}>
@@ -97,7 +103,7 @@ const dispatch = useDispatch()
 
           </div>
           <div className='button__search__container'>
-            <button className='aside__search-btn'>Search</button>
+            <button onClick={handeClick} className='aside__search-btn'>Search</button>
           </div>
         </form>
         <div className={`body__aside ${rotate ? 'translate__price' : ''}`}>

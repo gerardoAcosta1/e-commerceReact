@@ -39,6 +39,7 @@ const CartProduct = ({ product }) => {
 
     return (
         <div className='CartProduct' >
+            
             <div className='sections'>
                 <section className='section__1__cart'>
                     <img  className='image__cart' src={product?.product?.images[0].url} alt="" />

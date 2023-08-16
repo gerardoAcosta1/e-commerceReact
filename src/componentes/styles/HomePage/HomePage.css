@@ -20,7 +20,7 @@
     padding: 1em;
     margin: 1em;
 }
-
-hr{
-    border: 1px solid black;
+.caregory{
+    justify-content: flex-start;
 }
+

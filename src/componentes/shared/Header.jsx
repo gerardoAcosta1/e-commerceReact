@@ -2,11 +2,14 @@ import { Link, Navigate, useNavigate } from "react-router-dom"
 import '../styles/Header.css'
 import { useState } from "react"
 import { getCartThunk } from "../../store/slices/cart.slice"
+import { useDispatch } from "react-redux"
+import { getAllProductsThunk } from "../../store/slices/products.slice"
 
 const Header = ({setVisible, visible, setCount, count,visibleA}) => {
 const clickFuera = () => {
  
 }
+const dispatch = useDispatch()
 const navigate = useNavigate()
  const isVisible = ()=>{
 
@@ -18,6 +21,10 @@ const navigate = useNavigate()
   }
 
  }
+ const handleHome =  ()=> {
+ 
+  dispatch(getAllProductsThunk())
+ }
 const a = document.addEventListener('click', clickFuera)
   return (
 
@@ -26,7 +33,7 @@ const a = document.addEventListener('click', clickFuera)
 
         <div className='logo__header'>
           <Link to='/'>
-            <strong>e-commerce</strong>
+            <strong onClick={handleHome}>e-commerce</strong>
           </Link>
         </div>
 

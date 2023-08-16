@@ -59,14 +59,19 @@ const CardProduct = ({ product }) => {
     }
     return (
         <div className='container__product '>
+            
+         
             <article onClick={handleNavigate} className='product__card ' >
+            <div className='modal__container'>
+            <h5 className='modal'></h5>
+            </div>
                 <div className='content__header'>
-                <header className='header__card'>
-                  
-                    <img  className='image__card' src={product?.images[0].url} alt="" />
-                   
-                    
-                </header>
+                    <header className='header__card'>
+
+                        <img className='image__card' src={product?.images[0].url} alt="" />
+
+
+                    </header>
                 </div>
                 <section className='information__card'>
                     <h4 className='brand__card'>{product.brand}</h4>

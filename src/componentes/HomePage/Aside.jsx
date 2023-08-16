@@ -42,6 +42,7 @@ const dispatch = useDispatch()
   const filterCategory = e => {
 
     filterByCategory(e)
+    console.log(e)
     if (e == 5) handleAllCategories()
 
   }
