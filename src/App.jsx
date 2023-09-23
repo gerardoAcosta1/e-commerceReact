@@ -43,13 +43,7 @@ function App() {
       />
       
       <Routes>
-        <Route path='/' element={<HomePage 
-         setVisibleA={setVisibleA}
-         visibleA={visibleA}
-         visible={visible}
-       
-         
-         />} />
+        
          
         <Route path='/register' element={<RegisterPage /> } />
         <Route path='/login' element={<LoginPage />} />
@@ -58,6 +52,13 @@ function App() {
       </Routes>
       <Routes>
         <Route element={<ProtectedRoutes />}>
+        <Route path='/' element={<HomePage 
+         setVisibleA={setVisibleA}
+         visibleA={visibleA}
+         visible={visible}
+       
+         
+         />} />
           <Route element={<ProtectedRoutes2 />}>
             <Route path='/product/:id' element={<CartPage
               visible={visible}
