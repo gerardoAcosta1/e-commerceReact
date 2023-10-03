@@ -42,13 +42,20 @@ function App() {
     
       />
       
+      
+      
       <Routes>
-        
-         
         <Route path='/register' element={<RegisterPage /> } />
         <Route path='/login' element={<LoginPage />} />
-        
+
         <Route path='/product/:id' element={<ProductIdPage />} />
+        <Route exact path='/' element={<CartPage
+            visible={visible}
+            count={count}
+            setVisible={setVisible}
+            setVisibleA={setVisibleA}
+          />}>
+          </Route>
       </Routes>
       <Routes>
         <Route element={<ProtectedRoutes />}>
@@ -56,8 +63,6 @@ function App() {
          setVisibleA={setVisibleA}
          visibleA={visibleA}
          visible={visible}
-       
-         
          />} />
           <Route element={<ProtectedRoutes2 />}>
             <Route path='/product/:id' element={<CartPage
@@ -79,13 +84,7 @@ function App() {
             />}>
             </Route>
           </Route>
-          <Route exact path='/' element={<CartPage
-            visible={visible}
-            count={count}
-            setVisible={setVisible}
-            setVisibleA={setVisibleA}
-          />}>
-          </Route>
+          
           <Route exact path='/' element={<AsideMovilPage/>}>
        
           </Route>
